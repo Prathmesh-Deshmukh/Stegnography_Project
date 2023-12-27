@@ -1,0 +1,169 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://fonts.googleapis.com/css?family=Bebas Neue' rel='stylesheet'>
+    <title>Image Steganography Project</title>
+    <style>
+        .vertical {
+            border-left: 5px solid black;
+            height: 400px;
+            position:absolute;
+            left: 50%;
+            opacity: 0.5;
+        }
+        .desc{
+            margin-left: 100px;
+            margin-right: 100px;
+            padding-bottom: 30px;
+        }
+        .image-container {
+            position: relative;
+            width: 50%;
+            float: left;
+            text-align: center;
+        }
+        .button-link {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            /*
+             This moves the element back by
+             half of its own width and height.
+             <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+            */
+        }
+        .footer {
+            background-color: #f8f9fa;
+            text-align: center;
+            padding: 15px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+        .form{
+            padding: 15px;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+        p{
+            display: flex;
+            justify-content: center;
+        }
+        body {
+            background: linear-gradient(-45deg, #5C54CF, #B34FE0, #FDB721, #FB3443);
+            background-size: 400% 400%;
+            animation: change 15s ease infinite;
+        }
+        @keyframes change {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        hr {
+            border: 0;
+            height: 1px;
+            background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+        }
+        .card {
+            padding-top: 1em;
+            margin-bottom: 1em;
+            display: flex;
+            flex: 0 1 calc(50% - 0.5em);
+            /* width: calc(50% - 1em); */
+        }
+        
+        .card-content {
+            padding: 1.4em;
+        }
+        h3{
+            font-family: 'Bebas Neue';
+            text-align: center;
+            opacity: 1;
+            color: #000;
+        }
+        .card {
+            background-color: #808080;
+            margin-bottom: 2em;
+            opacity: .8;
+        }
+        p {
+            text-align: justify;
+            text-justify: inter-word;
+          }
+    </style>
+</head>
+<body>
+   {% include "navbar.html" %}
+   <br><br>
+
+    <div class="form">
+        <div>
+            <div class="image-container">
+                <img src="/static/images/steg.png" alt="Stegano Image" style="width: 95%;">
+            </div>
+            <div class="card">
+                <h3 style="font-size: 2.5rem;">What is Steganography?</h3>
+                <p class="card-content">
+                    Steganography is the practice of concealing information within another message or physical object to avoid detection. Steganography can be used to hide virtually any type of digital content, including text, image, video, or audio content. That hidden data is then extracted at its destination.
+                    Content concealed through steganography is sometimes encrypted before being hidden within another file format. If it isn’t encrypted, then it may be processed in some way to make it harder to detect.
+                    As a form of covert communication, steganography is sometimes compared to cryptography. However, the two are not the same since steganography does not involve scrambling data upon sending or using a key to decode it upon receipt.
+                    The term ‘steganography’ comes from the Greek words ‘steganos’ (which means hidden or covered) and ‘graphein’ (which means writing). Steganography has been practiced in various forms for thousands of years to keep communications private. For example, in ancient Greece, people would carve messages on wood and then use wax to conceal them. Romans used various forms of invisible inks, which could be deciphered when heat or light were applied.
+                    Steganography is relevant to cybersecurity because ransomware gangs and other threat actors often hide information when attacking a target. For example, they might hide data, conceal a malicious tool, or send instructions for command-and-control servers. They could place all this information within innocuous-seeming image, video, sound, or text files.
+                </p>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h3 style="font-size: 2.5rem;">How Steganography works</h3>
+            <p class="card-content">
+                Steganography works by concealing information in a way that avoids suspicion. One of the most prevalent techniques is called ‘least significant bit’ (LSB) steganography. This involves embedding the secret information in the least significant bits of a media file. For example:
+                In an image file, each pixel is made up of three bytes of data corresponding to the colors red, green, and blue. Some image formats allocate an additional fourth byte to transparency, or ‘alpha’.
+                LSB steganography alters the last bit of each of those bytes to hide one bit of data. So, to hide one megabyte of data using this method, you would need an eight-megabyte image file.
+                Modifying the last bit of the pixel value doesn’t result in a visually perceptible change to the picture, which means that anyone viewing the original and the steganographically-modified images won’t be able to tell the difference.
+                The same method can be applied to other digital media, such as audio and video, where data is hidden in parts of the file that result in the least change to the audible or visual output.
+                Another steganography technique is the use of word or letter substitution. This is where the sender of a secret message conceals the text by distributing it inside a much larger text, placing the words at specific intervals. While this substitution method is easy to use, it may also make the text look strange and out of place since the secret words might not fit logically within their target sentences.
+                Other steganography methods include hiding an entire partition on a hard drive or embedding data in the header section of files and network packets. The effectiveness of these methods depends on how much data they can hide and how easy they are to detect.
+            </p>
+        </div>
+        
+        <div class = "row">
+        <div class="image-container mt-4" style="float: left;">
+            <div class="card desc">
+                <p class="card-content">
+                    Encrption in Steganography means hiding the text in the Image. This can be done by various processes or algorithm but here we are considering LSB in order to encrypt it. You can do this if you want to share something through the network but you have been consious about 
+                    the packets been traced and information getting stole. This is one of the best method as the attacker wouldn't recognise that something valuable is been transmitted over the network which was the case in Ciphertext. You can try Stegano Encryption by pressing 'Encrypt Now' button and try Steganography Online.
+                </p>
+            </div>
+            <br><br><br><br><br><br><br><br><br>
+            <a href="encryption/" class="btn btn-danger button-link">Encrypt Now</a>
+        </div>
+    
+        <div class = "vertical"></div>
+
+        <div class="image-container mt-4">
+            <div class="card desc">
+                <p class="card-content">
+                    Decryption in Steganography is done to transform your Steganographic Image into a normal image and the text which was meant to be hidden in the image. In other websites, the decryption algorithm works without using Passwords. The main disadvantage of this is that if the attacker
+                    tries to decrypt every single image because of being suspicious, they will have the information if actuall Steganographic image is found. To overcome this problem, we have enrolled the password system so if attacker tries to decrypt image, they have to use passwords. To try Stegano Decryption, press 'Decrypt Now' button. 
+                </p>
+            </div>
+            <br><br><br><br><br><br><br><br><br>
+            <a href="decryption/" class="btn btn-danger button-link">Decrypt Now</a>
+        </div>
+    </div>
+    </div>
+    {% include "footer.html" %}
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

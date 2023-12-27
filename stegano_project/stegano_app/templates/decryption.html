@@ -1,0 +1,52 @@
+{% include "navbar.html" %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+     <title>Decryption - Image Steganography Project</title>
+     <style>
+        body {
+            background: linear-gradient(-45deg, #5C54CF, #B34FE0, #FDB721, #FB3443);
+            background-size: 400% 400%;
+            animation: change 15s ease infinite;
+        }
+        @keyframes change {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+     </style>
+</head>
+<body>
+       
+    <div class="container mt-5">
+        <h1 class="text-center">Decrypt Text from Image</h1>
+        <form class="mt-5" action="{% url 'decryption' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="image">Encrypted Image:</label>
+                <input type="file" name="image" id="image" class="form-control-file">
+            </div>
+            <div class="form-group">
+                <label for="pass">Enter the Password:</label>
+                <input type="password" class="form-control" id="pass" name="pass" require/>
+            </div>
+            <input type="submit" value="Decrypt" class="btn btn-primary">
+        </form>
+        {% if text %}
+            <div class="alert {{ cla }} mt-3">
+                <h4>Decrypted Text:</h4>
+                <p>{{ text }}</p>
+            </div>
+        {% endif %}
+    </div>
+
+
+</body>
+</html>

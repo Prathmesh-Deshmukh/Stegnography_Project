@@ -1,0 +1,51 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+     <title>Encryption - Image Steganography Project</title>
+     <style>
+        body {
+            background: linear-gradient(-45deg, #5C54CF, #B34FE0, #FDB721, #FB3443);
+            background-size: 400% 400%;
+            animation: change 15s ease infinite;
+        }
+        @keyframes change {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+     </style>
+</head>
+<body>
+    {% include "navbar.html" %}
+    <div class="container mt-5">
+        <h1 class="text-center">Encrypt Your Image</h1>
+        <form action="{% url 'encryption' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="image">Select an Image:</label>
+                <input type="file" class="form-control-file" id="image" name="image" required>
+            </div>
+            <div class="form-group">
+                <label for="text">Enter the Text:</label>
+                <textarea class="form-control" id="text" name="text" rows="3" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="password">Enter the Password:</label>
+                <input type="password" class="form-control" id="pass" name="pass" required/>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+        {% if message %}
+        <p align="center">{{ message }}</p>
+    {% endif %}
+    </div>
+</body>
+</html>
